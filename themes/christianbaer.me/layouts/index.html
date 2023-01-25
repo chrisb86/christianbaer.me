@@ -1,0 +1,47 @@
+{{ partial "header.html" . }}
+
+{{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") }}
+{{ range $paginator.Pages }}
+
+  <article class="post">
+    <header>
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+      <aside class="small">{{ partial "postmeta_header.html" . }}</aside>
+    </header>
+    {{ if .Site.Params.truncate_home }}
+      <p class="no-margin-bottom">{{ .Content | truncate 500 }}</p>
+    {{ else }}
+      {{ .Content }}
+    {{ end }}
+    <footer>
+    {{ if .Params.tags }}
+    <section class="tags">
+      <strong>Tags</strong> {{ partial "tags.html" . }}
+    </section>
+    {{ end }}
+    {{ if .Site.Params.truncate_home }}
+      {{ partial "readmore.html" . }}
+    {{ end }}
+    </footer>
+  </article>
+{{ end }}
+
+  <div id="pagination">
+    <ul>
+  {{ if $paginator.HasPrev }}
+      <li class="pagination__item pagination__item--previous">
+        <a href="{{ $paginator.Prev.URL }}" class="pagination__link pagination__link--previous">
+          ← Neuere Beiträge
+        </a>
+      </li>
+    {{ end }}
+    {{ if $paginator.HasNext }}
+      <li class="pagination__item pagination__item--next">
+        <a href="{{ $paginator.Next.URL }}" class="pagination__link pagination__link--next">
+          Ältere Beiträge →
+        </a>
+      </li>
+  {{ end }}
+    </ul>
+  </div>
+{{ partial "footer.html" . }}

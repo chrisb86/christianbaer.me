@@ -1,0 +1,75 @@
+baseurl = "https://christianbaer.me/"
+title = "christianbaer.me"
+paginate = 5
+theme = "christianbaer.me"
+
+pygmentsStyle                 = "monokai"
+pygmentsCodeFences            = true
+pygmentsCodefencesGuessSyntax = true
+pygmentsUseClasses            = true
+
+dateFormat = "2006-01-02"
+[permalinks]
+    # Optional. Change the permalink format for the 'post' content type.
+    # The format shown here is the same one Jekyll/Octopress uses by default.
+    post = "/post/:year/:month/:slug/"
+
+[author]
+    # Optional. Used in RSS feed meta information.
+    name = "Christian Baer"
+    email = "kontakt@christianbaer.me"
+
+[params]
+    languageCode = "de-DE"
+    description = "Unionist. Utopian. Nerd. Coffee lover. Photographer. Star Wars. FCSP."
+    author = "Christian Baer"
+    copyright = "Copyright 2019 ~ Christian Baer"
+    dateformat = "2006-01-02"
+    truncate_home = "true"
+    googleSiteVerification = "gd58AQvXqxcfxrKWCSIQx-u4fFSEMJjUEvsJ-6w8f3k"
+
+[imaging]
+    # Default resample filter used for resizing. Default is Box,
+    # a simple and fast averaging filter appropriate for downscaling.
+    # See https://github.com/disintegration/imaging
+    resampleFilter = "Linear"
+    # Default JPEG quality setting. Default is 75.
+    quality = 75
+
+[sitemap]
+  ChangeFreq = ""
+  Filename = "sitemap.xml"
+  Priority = "-1"
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+# Menu
+[menu]
+  # Header
+  [[menu.main]]
+    url ="/"
+    name ="Home"
+    weight = 1
+  [[menu.main]]
+    url ="/ueber-mich"
+    name ="Über mich"
+    weight = 2
+  [[menu.main]]
+    url ="/projekte"
+    name ="Projekte"
+    weight = 3
+  [[menu.main]]
+    url = "/post/"
+    name = "Archiv"
+    weight = 4
+  [[menu.main]]
+    url = "/index.xml"
+    name = "RSS"
+    weight = 5
+
+  # Footer
+  [[menu.footer]]
+    url = "/datenschutz/"
+    name = "Datenschutz/Impressum"
+    weight = 4

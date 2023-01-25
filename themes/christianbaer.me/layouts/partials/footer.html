@@ -1,0 +1,16 @@
+</main>
+</div>
+  <footer id="site">
+    <nav id="footer">
+      <ul>
+        {{- range .Site.Menus.footer -}}
+        <li><a href="{{ .URL | relLangURL }}">{{- .Name -}}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+    <aside><strong><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></strong> is powered by <strong><a href="https://gohugo.io">Hugo</a></strong> 
+    </br>&copy;&nbsp;{{ .Site.Params.Copyright }}</aside>
+  </footer>
+</div>
+</body>
+</html>

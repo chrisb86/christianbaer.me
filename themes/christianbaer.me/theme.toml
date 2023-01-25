@@ -1,0 +1,20 @@
+# theme.toml template for a Hugo theme
+# See https://github.com/gohugoio/hugoThemes#themetoml for an example
+
+name = "christianbaer.me"
+license = "MIT"
+licenselink = "https://git.debilux.org/chbaer/hugo-theme-christianbaer.me/src/branch/master/README.md"
+description = ""
+homepage = "https://christianbaer.me/"
+tags = []
+features = []
+min_version = "0.41"
+
+[author]
+  name = "Christian Baer"
+  homepage = "https://christianbaer.me"
+
+[original]
+  name = ""
+  homepage = ""
+  repo = ""

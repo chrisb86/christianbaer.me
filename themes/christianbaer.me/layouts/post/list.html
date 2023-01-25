@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+
+<h2>Archiv</h2>
+{{ range .Pages.GroupByDate "2006" }}
+<h3>{{ .Key }}</h3>
+<ul>
+    {{ range .Pages }}
+    <li>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}
+
+{{ partial "footer.html" . }}

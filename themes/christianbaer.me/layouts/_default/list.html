@@ -1,0 +1,12 @@
+{{ partial "header.html" . }}
+
+<h2>Übersicht für {{ .Title }}</h2>
+<ul>
+{{ range .Pages }}
+    <li>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+</ul>
+
+{{ partial "footer.html" . }}

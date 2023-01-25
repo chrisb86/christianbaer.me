@@ -1,0 +1,13 @@
+{{ partial "header.html" . }}
+
+<article>
+    <header>
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    </header>
+    {{ partial "headline-hash.html" .Content }}
+    {{ partial "tags.html" . }}
+  <footer>
+  </footer>
+</article>
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,14 @@
+{{ partial "header.html" . }}
+
+<article class="post">
+  <header>
+    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    <aside class="small">{{ partial "postmeta_header.html" . }}</aside>
+  </header>
+    {{ partial "headline-hash.html" .Content }}
+  <footer>
+    {{ partial "postmeta.html" . }}
+  </footer>
+</article>
+
+{{ partial "footer.html" . }}

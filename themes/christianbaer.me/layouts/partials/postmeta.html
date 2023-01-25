@@ -1,0 +1,15 @@
+<section class="postmeta_footer">
+  {{ if .Params.tags }}
+  <section class="tags">
+    <strong>Tags</strong> {{ partial "tags.html" . }}
+  </section>
+  {{ end }}
+
+  {{ $related := .Site.RegularPages.Related . | first 5 }}
+  {{ if $related }}
+  <section id="related">
+    <strong>&Auml;hnliche Artikel:</strong>
+    {{ partial "related.html" . }}
+  </section>
+  {{ end }}
+</section>

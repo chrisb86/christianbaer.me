@@ -1,0 +1,21 @@
+{{ partial "header.html" . }}
+
+<article>
+    <header>
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    </header>
+    <ul id="tagcloud">
+      {{ $type := .Type }}
+      {{ range $key, $value := .Data.Terms.ByCount }}
+          {{ $name := .Name }}
+          {{ $count := .Count }}
+          {{ with $.Site.GetPage (printf "/%s/%s" $type $name) }}
+              <li class="tag" style="font-size:1.{{ $count }}em;"><a href="{{ .Permalink }}">{{ $name }} ({{ $count }})</a></li>
+          {{ end }}
+      {{ end }}
+  </ul>
+  <footer>
+  </footer>
+</article>
+
+{{ partial "footer.html" . }}
