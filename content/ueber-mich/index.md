@@ -24,4 +24,4 @@ Ich habe eine Ausbildung als IT-Systemkaufmann bei einem großen deutschen Telek
 
 Meine bevorzugte E-Mail-Adresse ist [kontakt@christianbaer.me](mailto:kontakt@christianbaer.me) und E-Mail ist mein bevorzugter Kommunikationskanal für die meisten Angelegenheiten.
 
-Du kannst mich auch auf [GitHub](https://github.com/chrisb86), [Mastodon](https://chaos.social/@chbaer), [Twitter](https://twitter.com/_cbaer) und [Instagram](https://www.instagram.com/_chbaer/) antreffen.
+Du kannst mich auch auf [GitHub](https://github.com/chrisb86), [Mastodon](https://chaos.social/@chbaer) und [Instagram](https://www.instagram.com/_chbaer/) antreffen.
