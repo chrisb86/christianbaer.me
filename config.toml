@@ -1,4 +1,5 @@
 baseurl = "https://christianbaer.me/"
+appendPort = false
 title = "christianbaer.me"
 paginate = 5
 theme = "christianbaer.me"
