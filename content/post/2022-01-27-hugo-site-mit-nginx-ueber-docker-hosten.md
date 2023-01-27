@@ -13,13 +13,13 @@ tags:
 - traefik
 ---
 
-Ich habe in den letzten Monaten viele meiner Services auf Docker migriert, da in einigen Bereichen die Adminsitration wesentlich einfacher und schneller machbar ist, als es mit einem baremetal FreeBSD-System und selbst administrierter Software der Fall wäre.
+Ich habe in den letzten Monaten viele meiner Services auf Docker migriert, da in einigen Bereichen die Administration wesentlich einfacher und schneller machbar ist, als es mit einem baremetal FreeBSD-System und selbst administrierter Software der Fall wäre.
 
-Meine Webseite betreibe ich, nach wie vor, mit _hugo_. Als reverse Proxy setze ich _traefik_ ein.
+Meine Webseite betreibe ich, nach wie vor, mit _Hugo_. Als reverse Proxy setze ich _traefik_ ein.
 
-Ich stand also vor der Herausforderung, meine Webseite aus den hugo-Sourcen zu rendern und diese dann über einen Webserver zur Verfügung zu stellen, den ich hinter _traefik_ hängen kann. Bisher habe ich das Rendern immer auf meinem MacBook erledigt, und die fertige Seite per rsync in mein nginx-Verzeichnis geschoben.
+Ich stand also vor der Herausforderung, meine Webseite aus den Hugo-Sourcen zu rendern und diese dann über einen Webserver zur Verfügung zu stellen, den ich hinter _traefik_ hängen kann. Bisher habe ich das Rendern immer auf meinem MacBook erledigt, und die fertige Seite per rsync in mein nginx-Verzeichnis geschoben.
 
-Da ich diesen Prozess auch vereinfachen wollte, begann ich damit, meine hugo-Quellen jetzt in einem _git-Repository_ zu pflegen.
+Da ich diesen Prozess auch vereinfachen wollte, begann ich damit, meine Hugo-Quellen jetzt in einem _git-Repository_ zu pflegen.
 
 Da die Dateien jetzt einfach clonebar sind, gestaltet sicher der Prozess des Hostings ziemlich simpel.
 
@@ -31,23 +31,46 @@ Im _Dockerfile_ beschreiben wir, wie das Image gebaut werden soll. In der _docke
 
 ```Dockerfile
 FROM alpine as build
-RUN apk add --no-cache git hugo
 
-RUN git clone https://github.com/chrisb86/christianbaer.me /site
+## Set some variables
+ARG HUGO_VERSION=0.110.0
+ARG GITHUB_USER=chrisb86
+ARG GITHUB_REPOSITORY=christianbaer.me
 
+## Download Hugo from github
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz /hugo.tar.gz
+RUN tar -zxvf hugo.tar.gz
+
+## Install git for gitInfo support in Hugo 
+RUN apk add --no-cache git
+
+## Copy site sources to /site
+COPY ./ /site
 WORKDIR /site
-RUN hugo --gc --enableGitInfo
 
+# Cache Bust upon new commits
+ADD https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPOSITORY}/git/refs/heads/master /.git-hashref
+
+## Run Hugo
+RUN /hugo --gc --enableGitInfo
+
+## Copy rendered site to nginx image
 FROM nginxinc/nginx-unprivileged
 COPY --from=build /site/public /usr/share/nginx/html
 
+## Expose port 8080 to docker
 EXPOSE 8080
 ```
 
-Im Dockerfile definieren wir, dass wir ein alpine-Image nutzen und in diesem sowohl _git_, als auch _hugo_ installieren.
-Anschließend wir das git-Repository mit der hugo-Site nach _/site_ geklont.
+Im Dockerfile definieren wir, dass wir ein alpine-Image nutzen und setzen die zu nutzende Hugo-Version sowie GitHub-User und -Repository.
 
-Im nächsten Schritte wechseln wir nach _/site_ und lassen hugo die Webseite rendern.
+Anschließend laden wir die spezifizierte Hugo-Version von GitHub herunter und entpacken sie. Um die _--gitInfo_-Option in Hugo nutzen zu können, installieren wir noch _git_ über die Paketverwaltung.
+
+Die Vorbereitungen sind soweit erst mal abgeschlossen.
+
+Damit Docker nicht die ggf. Schon gecachten Site-Quellen nutzt, sondern die aktuellsten, fügen wir dem Image über `ADD`noch eine Datei von GitHub hinzu, die sich bei einem neuen Commit auf jeden Fall geändert hat.
+
+Im nächsten Schritte lassen wir _Hugo_ die Webseite rendern.
 
 Als letztes nutzen wir ein _nginx-unprivileged_-Image und kopieren die gerenderte Webseite von _/site/public_ in die Webroot unter _/share/nginx_html_ von wo aus sie unter dem Port _8080_ angeboten wird.
 
@@ -65,8 +88,7 @@ services:
     image: christianbaer.me
     container_name: christianbaer_me
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: https://github.com/chrisb86/christianbaer.me.git
     networks:
       - proxy
     labels:
@@ -82,10 +104,9 @@ services:
 networks:
   proxy:
     external: true
-
 ```
 
-In der _docker-compose.yaml_ definieren wir einen Service für unser Image. Über die build-Anweisungen sagen wir _docker-compose_, dass wir das Image aus dem aktuellen Ordner heraus bauen wollen, und welches Dockerfile wir hierfür nutzen. 
+In der _docker-compose.yaml_ definieren wir einen Service für unser Image. Über die build-context sagen wir _docker-compose_, welches git-Repository als Grundlage für den Container dienen soll. Das darin befindliche _Dockerfile_ wird dann automatisch ausgeführt.
 
 Die networks- und label-Parts binden das Image in mein traefik-Netzwerk ein, sorgen dafür, dass es über TLS unter https://christianbaer.me erreichbar ist und kümmern sich um die Zertifikate. Falls ein anderer Proxy genutzt wird, kann der Teil entsprechend weggelassen werden und stattdessen z.B. über _ports: 80:8080_ der Webserver unter POrt 80 erreichbar gemacht werden.
 

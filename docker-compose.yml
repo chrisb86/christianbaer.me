@@ -5,9 +5,7 @@ services:
     image: christianbaer.me
     container_name: christianbaer_me
     build:
-      context: .
-      dockerfile: Dockerfile
-      # dockerfile: localsrc.Dockerfile
+      context: https://github.com/chrisb86/christianbaer.me.git
     networks:
       - proxy
     labels:
