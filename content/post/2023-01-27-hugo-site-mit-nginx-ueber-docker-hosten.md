@@ -108,7 +108,7 @@ networks:
 
 In der _docker-compose.yaml_ definieren wir einen Service für unser Image. Über die build-context sagen wir _docker-compose_, welches git-Repository als Grundlage für den Container dienen soll. Das darin befindliche _Dockerfile_ wird dann automatisch ausgeführt.
 
-Die networks- und label-Parts binden das Image in mein traefik-Netzwerk ein, sorgen dafür, dass es über TLS unter https://christianbaer.me erreichbar ist und kümmern sich um die Zertifikate. Falls ein anderer Proxy genutzt wird, kann der Teil entsprechend weggelassen werden und stattdessen z.B. über _ports: 80:8080_ der Webserver unter POrt 80 erreichbar gemacht werden.
+Die networks- und label-Parts binden das Image in mein traefik-Netzwerk ein, sorgen dafür, dass es über TLS unter https://christianbaer.me erreichbar ist und kümmern sich um die Zertifikate. Falls ein anderer Proxy genutzt wird, kann der Teil entsprechend weggelassen und stattdessen der Port 8080 ganz klassisch nach deinen Bedürfnissen exposed werden.
 
 Alles in allem ist das alles viel einfacher, als gedacht. Ich schreibe jetzt einfach einen Beitrag, committe ihn zu git und baue über `docker-compose up -d --build` in ein paar Sekunden das Image neu. Um alles andere kümmert sich Docker.
 
