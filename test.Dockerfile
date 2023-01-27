@@ -14,7 +14,7 @@ COPY ./ /site
 
 WORKDIR /site
 RUN ls /site
-RUN cp hugo.toml config.toml ## Backwards compatibility
+#RUN cp hugo.toml config.toml ## Backwards compatibility
 
 # Cache Bust upon new commits
 ADD https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPOSITORY}/git/refs/heads/master /.git-hashref
