@@ -1,4 +1,5 @@
 FROM alpine as build
+ADD .
 RUN apk add --no-cache git hugo
 RUN hugo --gc --enableGitInfo
 
