@@ -4,7 +4,7 @@ ARG HUGO_VERSION=0.110.0
 ARG GITHUB_USER=chrisb86
 ARG GITHUB_REPOSITORY=christianbaer.me
 
-ADD https://github.com/gohugoio/hugo/releases/download/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz /hugo.tar.gz
+ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz /hugo.tar.gz
 RUN tar -zxvf hugo.tar.gz
 RUN /hugo version
 
