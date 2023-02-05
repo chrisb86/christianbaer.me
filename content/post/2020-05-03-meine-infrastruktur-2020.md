@@ -60,7 +60,7 @@ Auf donna laufen aktuell 10 Jails:
 - **plex**: Der [Plex](https://plex.tv)-Server streamt Medien an Familie und
   Freunde.
 - **rmbackup**: Diese Jail zieht regelmäßig Backups von allen Servern mithilfe von
-  [rmbackup](https://git.debilux.org/chbaer/rmbackup)
+  [rmbackup](https://github.com/chrisb86/rmbackup)
 - **sbbackup**: [sbbackup](https://git.debilux.org/chbaer/sbbackup) ist ein
   kleines Script, dass die Home-Directories auf donna regelmäßig offsite in eine
   Hetzner Storage-Box sichert.
