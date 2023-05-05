@@ -1,10 +1,10 @@
 ---
 date: 2023-05-05 15:13:08+00:00
 draft: false
-title: "Lokale-verzeichnisse-in-bhyve-vm-mounten"
+title: "Lokale Verzeichnisse eines FreeBSD-Servers in einer bhyve-VM mounten"
 slug: "lokale-verzeichnisse-in-bhyve-vm-mounten/"
 
-description: "Lokale verzeichnisse eines FreeBSD-Servers in einer bhyve-VM mounten."
+description: "Lokale Verzeichnisse eines FreeBSD-Servers in einer bhyve-VM mounten."
 type: post
 tags:
 - Docker
