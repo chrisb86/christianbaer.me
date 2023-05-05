@@ -1,7 +1,7 @@
 ---
-date: 2023-05-05 17:13:08+00:00
+date: 2023-05-05 15:13:08+00:00
 draft: false
-title: "lokale-verzeichnisse-in-bhyve-vm-mounten"
+title: "Lokale-verzeichnisse-in-bhyve-vm-mounten"
 slug: "lokale-verzeichnisse-in-bhyve-vm-mounten/"
 
 description: "Lokale verzeichnisse eines FreeBSD-Servers in einer bhyve-VM mounten."
@@ -26,7 +26,7 @@ Zur Verwaltung meiner VMs nutze ich [vm-bhyve](https://github.com/churchers/vm-b
 
 Ich habe eine VM names _docker01_. Diese stoppe ich erst mal mit ```sudo vm stop docker```.
 
-Über ```sudo vm config docker```öffne ich nun die Konfigurationsdatei für die VM.
+Über ```sudo vm config docker``` öffne ich nun die Konfigurationsdatei für die VM.
 
 ```sh
 loader="grub"
@@ -63,12 +63,12 @@ disk1_dev="custom"
 ```
 Wenn weitere Shares hinzugefügt werden sollen, muss die Disk-Nummer entsprechend erhöht werden (disk2_type usw...).
 
-Wenn die Datei gespeichert ist, können wir über ein ```sudo vm start docker```die VM wieder hochfahren.
+Wenn die Datei gespeichert ist, können wir über ein ```sudo vm start docker``` die VM wieder hochfahren.
 
 In der VM erstellen wir ein Verzeichnis zum Mounten des Shares z.B. mit ```mkdir -p /mnt/docker``` und können dann anschließend über ```mount -t 9p -o trans=virtio docker /mnt/docker``` den Share einbinden.
 
 Wenn alles soweit geklappt hat und die Daten da sind, können wir ```docker /mnt/docker 9p trans=virtio,rw 0 0``` in die _/etc/fstab_ einfügen, um das Verzeichnis zukünftig direkt beim Booten zu starten.
 
-Das alles ist auf jeden Fall schon malö wesentlich einfacher, als alles über NFS zu machen und sich über Firewallregeln, Berechtigungen usw. Gedanken zu machen. Ob ich darauf jetzt Datenbanken betreiben kann, oder nur NFS aus meinem vorherigen Setup ersetzen kann, muss ich noch ausprobieren.
+Das alles ist auf jeden Fall schon mal wesentlich einfacher, als alles über NFS zu machen und sich über Firewallregeln, Berechtigungen usw. Gedanken zu machen. Ob ich darauf jetzt Datenbanken betreiben kann, oder nur NFS aus meinem vorherigen Setup ersetzen kann, muss ich noch ausprobieren.
 
 Ich bin auf jeden Fall froh, dass FreeBSD jetzt für mich nicht nur durch Jails, sondern auch mit virtuellen Maschinen nutzbar ist. Für mich ist und bleibt FreeBSD auf dem Server das Betriebssystem der Wahl.

@@ -1,5 +1,5 @@
 ---
-date: 2022-01-27 10:34:08+00:00
+date: 2023-01-27 10:34:08+00:00
 draft: false
 title: "Hugo-Site mit nginx über Docker hosten"
 slug: "hugo-site-mit-nginx-ueber-docker-hosten/"
