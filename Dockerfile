@@ -5,6 +5,9 @@ ARG HUGO_VERSION=0.110.0
 ARG GITHUB_USER=chrisb86
 ARG GITHUB_REPOSITORY=christianbaer.me
 
+RUN apk update && apk add tzdata
+ENV TZ="Europe/Berlin"
+
 ## Download Hugo from github
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz /hugo.tar.gz
 RUN tar -zxvf hugo.tar.gz
