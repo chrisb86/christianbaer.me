@@ -1,7 +1,7 @@
 ---
 date: 2022-01-27 10:34:08+00:00
 draft: false
-title: "hugo-Site mit nginx über Docker hosten"
+title: "Hugo-Site mit nginx über Docker hosten"
 slug: "hugo-site-mit-nginx-ueber-docker-hosten/"
 
 description: "Eine hugo Website aus einem git-Repository clonen und die Dateien in ein nginx-Dockerimage kopieren, um sie in einem COntainer zu hosten"
