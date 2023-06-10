@@ -23,7 +23,7 @@ WORKDIR /site
 ADD https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPOSITORY}/git/refs/heads/master /.git-hashref
 
 ## Run Hugo
-RUN /hugo --gc --enableGitInfo
+RUN /hugo --gc
 
 ## Copy rendered site to nginx image
 FROM nginxinc/nginx-unprivileged
