@@ -2,10 +2,8 @@ version: '3'
 
 services:
   cbme:
-    image: christianbaer.me
+    image: git.debilux.org/chris/christianbaer.me
     container_name: christianbaer_me
-    build:
-      context: https://github.com/chrisb86/christianbaer.me.git
     networks:
       - proxy
     labels:
